@@ -1,0 +1,14 @@
+// Copyright (C) 2023 Intel Corporation
+// SPDX-License-Identifier: MIT
+
+{
+  "recommendations": [
+    "esbenp.prettier-vscode",
+    "dbaeumer.vscode-eslint",
+    "mhutchie.git-graph",
+    "eamodio.gitlens",
+    "ymotongpoo.licenser",
+    "shardulm94.trailing-spaces",
+    "naumovs.color-highlight",
+  ]
+}
