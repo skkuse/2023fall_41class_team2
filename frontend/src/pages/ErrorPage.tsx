@@ -5,6 +5,7 @@ import './ErrorPage.scss';
 
 import { useRouteError } from 'react-router-dom';
 
+// When page not found
 const ErrorPage = () => {
   const error = useRouteError();
   console.error(error);
