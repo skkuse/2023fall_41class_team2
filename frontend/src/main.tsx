@@ -5,7 +5,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import Home from './pages/Home.tsx';
+import { RecoilRoot } from 'recoil';
 
+// Create a router for page routing
 const router = createBrowserRouter([
   {
     path: '/',
@@ -22,6 +24,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   // <React.StrictMode>
-  <RouterProvider router={router} />,
+  <RecoilRoot>
+    <RouterProvider router={router} />,
+  </RecoilRoot>,
   // </React.StrictMode>,
 );
