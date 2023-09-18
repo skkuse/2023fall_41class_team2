@@ -10,4 +10,14 @@ export default defineConfig({
   resolve: {
     alias: [{ find: '@', replacement: path.resolve(__dirname, 'src') }],
   },
+  server: {
+    proxy: {
+      // /api/getData → http://localhost:8000/getData로 변경
+      '/api': {
+        target: 'http://localhost:8000', // fetch 요청에 대한 target 경로 설정
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''), // /api에 해당하는 경로를 삭제
+      },
+    },
+  },
 });
