@@ -1,13 +1,14 @@
 // Copyright (C) 2023 Intel Corporation
 // SPDX-License-Identifier: MIT
 
-import { useState } from 'react';
 import reactLogo from '@/assets/react.svg';
 import viteLogo from '/vite.svg';
 import './Home.scss';
+import { useRecoilState } from 'recoil';
+import testState from '@/recoil/atoms/testState';
 
 function Home() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useRecoilState<number>(testState.count);
 
   console.log(import.meta.env.VITE_BACKEND_URL);
 
