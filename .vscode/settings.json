@@ -4,7 +4,7 @@
     "licenser.author": "SWE-Team2",
     "editor.tabSize": 2,
     "editor.fontSize": 13,
-    "[javascript][typescript][json]": {
+    "[javascript][typescript][typescriptreact][json]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode",
       "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
