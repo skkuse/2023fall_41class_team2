@@ -9,8 +9,20 @@ def java_compile(file_name):
 def java_run(class_name):
     stderr = subprocess.run(f"/usr/bin/time -v java {class_name}", shell=True, capture_output=True, text=True).stderr
     runtime_info = [x.replace('\t','').split(': ') for x in stderr.splitlines()]
-    runtime_info = dict(runtime_info[1:])
-    return runtime_info
+
+    essential_info_list = [
+        'User time (seconds)',
+        'Percent of CPU this job got',
+        'Average total size (kbytes)',
+    ]
+
+    essential_info = {}
+
+    for k in runtime_info:
+        if k[0] in essential_info_list:
+            essential_info[k[0]] = k[1]
+
+    return essential_info
 
 def runtime_results(java_code):
     searched_class = re.findall("class ([A-Za-z0-9_]*) {", java_code)
