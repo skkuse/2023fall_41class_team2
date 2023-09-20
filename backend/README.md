@@ -48,6 +48,11 @@ python3 -m pipenv shell
 #위의 것이 안될 경우 pipenv 옵션 재설치
 sudo -H pip install -U pipenv
 ```
+```
+#pip 에서 계속 오류가 발생하는 경우, apt 시도
+sudo apt install pipenv
+```
+ 
 
 ## FastAPI 서버 실행
 ```
