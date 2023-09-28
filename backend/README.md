@@ -7,10 +7,43 @@
  
 # 📜 Backend 개발환경 구축 가이드
 
-## 권장 개인 환경
+Docker 구축 혹은 Ubuntu 직접 구축 중 하나를 선택해서 진행하세요.
+
+## (방법 1) Docker 환경 구축
+
+원하는 운영체제에 docker를 설치합니다.
+이후 다음 절차를 통해 컨테이너를 생성합니다.
+
+```bash
+docker build -t <원하는 이미지 이름> <dockerfile 위치>
+docker run -it --name <원하는 컨테이너 이름> <앞서 만든 이미지 이름>
+```
+
+컨테이너 구축 이후 `git clone`으로 repo를 복사하고, 원하는 branch로 바꿉니다. 현재 예시로는 `feature/add-java-exec-module`을 사용합니다.  
+실제 개발을 위해서는 `docker run -v` 옵션을 통해 호스트의 프로젝트 폴더를 볼륨으로 사용하는걸 추천합니다.
+```bash
+git clone https://github.com/skkuse/2023fall_41class_team2
+git checkout -t remotes/origin/feature/add-java-exec-module
+```
+이후 `backend` 폴더에서 pipenv 환경을 구축하고 shell을 열어 실행해봅니다.
+
+```bash
+pipenv install
+pipenv shell
+uvicorn main:app --reload
+```
+
+정상적으로 실행이 되었다면 다음 사이트에 접속해 API를 확인합니다.
+
+http://127.0.0.1:8000/docs
+
+
+## (방법 2) Ubuntu 직접 구축
+
+### 권장 개인 환경
 해당 항목들은 사전에 설치 & 준비 바랍니다.
 
-- Ubuntu 20.04 & 22.04
+- Ubuntu 22.04
 - java jdk 17
 - python 3.10.12
 - pipenv 패키지
@@ -33,7 +66,7 @@ PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/u
 JAVA_HOME="/usr/lib/jvm/java-17-openjdk-amd64"
 ```
 
-## pipenv 환경
+### pipenv 환경
 관련 설명 사이트(필독): https://www.daleseo.com/python-pipenv/
 
 `/backend` 폴더에 pipenv에 필요한 Pipfile, Pipfile.lock 파일이 있습니다.
