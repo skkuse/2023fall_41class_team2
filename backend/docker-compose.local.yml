@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  api_server:
+    build:
+      context: .
+      dockerfile: Dockerfile.local
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app
+    command: uvicorn main:app --host 0.0.0.0 --reload
