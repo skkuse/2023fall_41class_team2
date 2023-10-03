@@ -1,10 +1,9 @@
 FROM ubuntu:22.04
 
 # Install basic
-RUN apt-get update -y && \ 
+RUN apt-get update -y && \
     apt-get install -y \
     software-properties-common \
-    git \
     time
 
 # Install Python 3.10
@@ -23,4 +22,9 @@ RUN apt-get install openjdk-17-jdk -y
 # Test version
 RUN java -version && python3 --version
 
-CMD ["bash"]
+# Install dependencies
+COPY Pipfile Pipfile.lock ./
+RUN pipenv install --dev --system --deploy
+
+# Setting server
+WORKDIR /app
