@@ -14,3 +14,15 @@
   }
 }
 
+.home_result {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 20px;
+  background-color: rgb(241, 238, 238);
+  margin-bottom: 20px;
+
+  .home_result_item {
+    padding: 5px;
+  }
+}
+
