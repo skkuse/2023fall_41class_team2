@@ -11,6 +11,8 @@
     "formatting": "prettier --write \"src/**/*.{ts,tsx,json,md}\""
   },
   "dependencies": {
+    "@uiw/codemirror-theme-vscode": "^4.21.19",
+    "@uiw/react-codemirror": "^4.21.19",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.16.0",

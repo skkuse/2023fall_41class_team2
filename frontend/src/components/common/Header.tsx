@@ -3,7 +3,7 @@
 import './Header.scss';
 
 const Header = () => {
-  return <div className="header"></div>;
+  return <div className="header">Ecode</div>;
 };
 
 export default Header;
