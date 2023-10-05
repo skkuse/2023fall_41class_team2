@@ -4,14 +4,60 @@
 import './Home.scss';
 // import { useRecoilState } from 'recoil';
 // import testState from '@/recoil/atoms/TestState';
+import { useState } from 'react';
+
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 import CodeMirror from '@uiw/react-codemirror';
 import { vscodeDark } from '@uiw/codemirror-theme-vscode';
+import { java } from '@codemirror/lang-java';
+import { useRecoilState } from 'recoil';
+import javaState from '@/recoil/atoms/JavaState';
+
+const runJava = async (code: string) => {
+  const { data } = await axios.post('/api/run_java', {
+    req_code: code,
+  });
+  return data;
+};
 
 function Home() {
+  const [code, setCode] = useState('');
+  const [result, setResult] = useRecoilState(javaState.result);
+
+  const onChange = (value: string) => {
+    setCode(value);
+  };
+
+  const runJavaMutation = useMutation(runJava, {
+    onSuccess: (data) => {
+      setResult({
+        ...data,
+      });
+    },
+  });
+
+  const handleClick = () => {
+    runJavaMutation.mutate(code);
+  };
+
   return (
     <div className="home">
       <div className="home_container">
-        <CodeMirror className="home_editor" theme={vscodeDark} height="100%" />
+        <CodeMirror
+          value={code}
+          onChange={onChange}
+          className="home_editor"
+          theme={vscodeDark}
+          height="100%"
+          extensions={[java()]}
+        />
+        <div className="home_result">
+          <div className="home_result_item">time : {result.user_time}</div>
+          <div className="home_result_item">cpu : {result.cpu_percent}</div>
+          <div className="home_result_item">memory : {result.memory_usage}</div>
+        </div>
+        <button onClick={handleClick}>Click</button>
       </div>
     </div>
   );
