@@ -1,5 +1,9 @@
 FROM ubuntu:22.04
 
+# change apt source
+RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
+RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
+
 # Install basic
 RUN apt-get update -y && \
     apt-get install -y \
