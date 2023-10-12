@@ -30,5 +30,8 @@ RUN java -version && python3 --version
 COPY Pipfile Pipfile.lock ./
 RUN pipenv install --dev --system --deploy
 
+# make green_algorithms directory
+RUN mkdir /green_algorithms
+
 # Setting server
 WORKDIR /app
