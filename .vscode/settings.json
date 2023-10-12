@@ -1,14 +1,18 @@
 {
-    "licenser.license": "Custom",
-    "licenser.customHeader": "Copyright (C) @YEAR@ Intel Corporation\nSPDX-License-Identifier: MIT",
-    "licenser.author": "SWE-Team2",
-    "editor.tabSize": 2,
-    "editor.fontSize": 13,
-    "[javascript][typescript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true
-      },
-      "editor.formatOnSave": true,
+  "licenser.license": "Custom",
+  "licenser.customHeader": "Copyright (C) @YEAR@ Intel Corporation\nSPDX-License-Identifier: MIT",
+  "licenser.author": "SWE-Team2",
+  "editor.tabSize": 2,
+  "editor.fontSize": 13,
+  "[javascript][typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
     },
+    "editor.formatOnSave": true
+  },
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.formatOnType": true
+  }
 }
