@@ -13,13 +13,16 @@ def load_and_preprocess_csv(
     csv_path: str, drop_column: str, index_column: str, data_column: str
 ) -> (pd.DataFrame, dict):
     df = pd.read_csv(csv_path, sep=",", skiprows=1).drop(drop_column, axis=1)
-    dt = pd.Series(df.loc[:, data_column].values, index=df.loc[:, index_column]).to_dict()
+    dt = pd.Series(
+        df.loc[:, data_column].values, index=df.loc[:, index_column]
+    ).to_dict()
     return df, dt
 
 
 def print_with_title(func):
     def wrapper(*args, **kwargs):
         print()
+
 
 @dataclass(frozen=True)
 class GreenAlgorithmConstants:
@@ -30,7 +33,10 @@ class GreenAlgorithmConstants:
         os.path.join(DATA_DIR, "TDP_cpu.csv"), "source", "model", "TDP_per_core"
     )
     ref_values_df, ref_values_dict = load_and_preprocess_csv(
-        os.path.join(DATA_DIR, "referenceValues.csv"), "source", "variable", "value",
+        os.path.join(DATA_DIR, "referenceValues.csv"),
+        "source",
+        "variable",
+        "value",
     )
     carbon_intensity_dict = {"KR": 415.6}
 
@@ -150,7 +156,9 @@ class GreenAlgorithm:
         return result_dict
 
     def calculate_tree_months(self, carbon_emissions: float) -> float:
-        return carbon_emissions / self.ga_data.constants.ref_values_dict["treeYear"] * 12
+        return (
+            carbon_emissions / self.ga_data.constants.ref_values_dict["treeYear"] * 12
+        )
 
     def calculate_driving_kilometers(self, carbon_emissions: float) -> dict:
         result_dict = {}
@@ -176,7 +184,8 @@ class GreenAlgorithm:
             < 0.5 * self.ga_data.constants.ref_values_dict["flight_NYC-MEL"]
         ):
             result_dict["flying_context"] = (
-                carbon_emissions / self.ga_data.constants.ref_values_dict["flight_NY-SF"]
+                carbon_emissions
+                / self.ga_data.constants.ref_values_dict["flight_NY-SF"]
             )
             result_dict["flying_text"] = "NYC-San Francisco"
         else:
@@ -207,6 +216,3 @@ if __name__ == "__main__":
     ce = ga.calculate_carbon_emissions()
     tm = ga.calculate_tree_months(ce["carbon_emissions"])
     dk = ga.calculate_driving_kilometers(ce["carbon_emissions"])
-
-
-    

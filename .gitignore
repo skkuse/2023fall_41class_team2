@@ -3,3 +3,6 @@ backend/app/__pycache__
 
 # python3
 __pycache__/
+
+# asdf .tool-versions
+.tool-versions
