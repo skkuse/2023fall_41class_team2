@@ -15,7 +15,7 @@ import { useRecoilState } from 'recoil';
 import javaState from '@/recoil/atoms/JavaState';
 
 const runJava = async (code: string) => {
-  const { data } = await axios.post('/api/run_java', {
+  const { data } = await axios.post('/api/carbon_emission_calculate', {
     req_code: code,
   });
   return data;
@@ -53,9 +53,21 @@ function Home() {
           extensions={[java()]}
         />
         <div className="home_result">
-          <div className="home_result_item">time : {result.user_time}</div>
-          <div className="home_result_item">cpu : {result.cpu_percent}</div>
-          <div className="home_result_item">memory : {result.memory_usage}</div>
+          <div className="home_result_item">
+            carbon emissions (gram) : {result.carbon_emissions}
+          </div>
+          <div className="home_result_item">
+            energy needed (kWh) : {result.energy_needed}
+          </div>
+          <div className="home_result_item">
+            user time (sec) : {result.user_time}
+          </div>
+          <div className="home_result_item">
+            cpu (core usage) : {result.cpu_core_use}
+          </div>
+          <div className="home_result_item">
+            memory (KB) : {result.memory_usage}
+          </div>
         </div>
         <button onClick={handleClick}>Click</button>
       </div>
