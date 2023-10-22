@@ -47,7 +47,7 @@ class GreenAlgorithmFields:
     pue_used: float
 
     # CPU DATA
-    n_cpu_cores: int
+    n_cpu_cores: float
     tdp: int
     tdp_per_core: float
     usage_cpu_used: float  # 1.0
@@ -59,6 +59,7 @@ class GreenAlgorithmFields:
     # RUNTIME DATA
     runtime_hours: float  # hours
     runtime_minutes: float  # minutes
+    runtime_seconds: float # seconds
     runtime: float = None
 
     def __init__(self, **kwargs) -> None:
@@ -66,7 +67,7 @@ class GreenAlgorithmFields:
         self.__post_init__()  # explictly call __post_init__ because of custom init
 
     def __post_init__(self) -> None:
-        self.runtime = self.runtime_hours + self.runtime_minutes / 60
+        self.runtime = self.runtime_hours + self.runtime_minutes / 60 + self.runtime_seconds / (60*60)
 
 
 class GreenAlgorithm:
@@ -97,7 +98,7 @@ class GreenAlgorithm:
             result_dict["power_needed_cpu"] + result_dict["power_needed_gpu"]
         )
         result_dict["power_needed_memory"] = self.ga_data.pue_used * (
-            self.ga_data.memory * self.ga_data.constants.ref_values_dict["memoryPower"]
+            self.ga_data.memory / (1024*1024) * self.ga_data.constants.ref_values_dict["memoryPower"]
         )
         result_dict["power_needed"] = (
             result_dict["power_needed_core"] + result_dict["power_needed_memory"]

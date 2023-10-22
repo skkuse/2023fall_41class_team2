@@ -30,14 +30,10 @@ def java_run(class_name):
 
     # core percent -> core num
     essential_info["cpu_core_use"] = float(essential_info["cpu_core_use"][:-1]) / 100
-
-    # KB -> GB, set min value (1KB) to not get 0
-    essential_info["memory_usage"] = max(
-        float(essential_info["memory_usage"]) / (1024 * 1024), 1 / (1024 * 1024)
-    )
-
-    # sec -> min, set min value (1 micro sec) to not get 0
-    essential_info["user_time"] = max(float(essential_info["user_time"]) / 60, 0.000001)
+    # KB
+    essential_info["memory_usage"] = float(essential_info["memory_usage"])
+    # sec
+    essential_info["user_time"] = float(essential_info["user_time"])
 
     return essential_info
 

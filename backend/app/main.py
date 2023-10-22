@@ -42,8 +42,10 @@ def carbon_emission_calculate(
         # n_cpu_cores is combined with usage_cpu_used
         "psf": 1.0,
         "pue_used": 1.67,
+        # not use hour and min
         "runtime_hours": 0,
-        "runtime_minutes": runtime_info["user_time"],
+        "runtime_minutes": 0,
+        "runtime_seconds": runtime_info["user_time"],
         "tdp": 45,
         "tdp_per_core": 11.3,
         "usage_cpu_used": runtime_info["cpu_core_use"],
