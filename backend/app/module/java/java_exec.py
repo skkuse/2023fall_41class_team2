@@ -19,7 +19,7 @@ def java_run(class_name):
     essential_info_key = {
         "User time (seconds)": "user_time",
         "Percent of CPU this job got": "cpu_core_use",
-        "Average total size (kbytes)": "memory_usage",
+        "Maximum resident set size (kbytes)": "memory_usage",
     }
 
     essential_info = {}
