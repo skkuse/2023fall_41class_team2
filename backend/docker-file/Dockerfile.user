@@ -1,0 +1,24 @@
+FROM ubuntu:22.04
+
+# change apt source
+RUN sed -i 's/archive.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
+RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
+
+# Install basic
+RUN apt-get update -y && \
+    apt-get install -y \
+    software-properties-common \
+    time
+
+# Install Python 3.10
+RUN add-apt-repository ppa:deadsnakes/ppa -y && \
+    apt-get update -y && \
+    apt-get install -y \
+    python3.10 \
+    python3-pip
+
+# Install JDK 17
+RUN apt-get install openjdk-17-jdk -y
+
+# Setting server
+WORKDIR /user-data
