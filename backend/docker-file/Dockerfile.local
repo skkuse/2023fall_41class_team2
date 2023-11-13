@@ -8,23 +8,24 @@ RUN sed -i 's/security.ubuntu.com/mirror.kakao.com/g' /etc/apt/sources.list
 RUN apt-get update -y && \
     apt-get install -y \
     software-properties-common \
-    time
+    time \
+    apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+
+
+# Install Docker
+RUN curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+RUN add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+RUN apt-get install docker-ce docker-ce-cli containerd.io -y
 
 # Install Python 3.10
 RUN add-apt-repository ppa:deadsnakes/ppa -y && \
     apt-get update -y && \
     apt-get install -y \
-	python3.10 \
-	python3-pip
+    python3.10 \
+    python3-pip
 
 # Install pipenv
 RUN pip install pipenv
-
-# Install JDK 17
-RUN apt-get install openjdk-17-jdk -y
-
-# Test version
-RUN java -version && python3 --version
 
 # Install dependencies
 COPY Pipfile Pipfile.lock ./
