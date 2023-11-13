@@ -1,5 +1,4 @@
-backend/**/.old_java_code
+backend/**/user_container_build.log
 backend/**/__pycache__
-
 # asdf .tool-versions
 .tool-versions
