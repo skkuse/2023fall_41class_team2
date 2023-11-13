@@ -24,15 +24,16 @@ def carbon_emission_calculate(
         Body(
             examples=[
                 {
-                    "req_code": """public class HelloSKKU { public static void main(String[ ] args) { for(i = 0; i < 1000000000; i++){ System.out.println("Hello SKKU!");}}}"""
+                    "req_code": """public class HelloSKKU { public static void main(String[ ] args) { for(int i = 0; i < 10; i++){ System.out.println("Hello SKKU!"); System.err.println("Bye SKKU!");}}}"""
                 }
             ],
         ),
     ],
 ):
+    uid = "ThisIsTestUID"  # Front should be pass this value
     dicted_code = dict(code)
     java_code = dicted_code["req_code"]
-    runtime_info = java_exec.runtime_results(java_code)
+    runtime_info = java_exec.runtime_results(java_code, uid)
 
     # memory, runtime_minutes, usage_cpu_used values are given by java_exec module
     # some value is hardcoded because of Hardware diff
@@ -52,7 +53,6 @@ def carbon_emission_calculate(
     }
 
     carbon_emission_info = GreenAlgorithm(test_data_dict).carbon_calc_results()
-
     combined_info = dict(carbon_emission_info, **runtime_info)
 
     return combined_info
