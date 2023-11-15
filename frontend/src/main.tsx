@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
 import Home from './pages/Home.tsx';
+import MainPage from './pages/MainPage.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
 
@@ -17,6 +18,17 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home />,
+      },
+    ],
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: '/main',
+    element: <Layout />,
+    children: [
+      {
+        index: true,
+        element: <MainPage/>,
       },
     ],
     errorElement: <ErrorPage />,
