@@ -49,6 +49,17 @@
     border: none;
     border-radius: 20px;
 }
+
+.main_banner_button button:hover{
+    background-color: white;
+    color: $green;
+    font-size: 17px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
 .main_banner_img{
     width: 400px;
 }

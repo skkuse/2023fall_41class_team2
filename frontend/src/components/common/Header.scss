@@ -3,10 +3,34 @@
 
 @import '@/base.scss';
 
+
 .header {
   display: flex;
   height: $header-height;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: lightgray;
+  padding: 10px 40px 0px 40px;
+  background-color: $main-background-color;
+}
+
+.header_logo_img{
+  width: 70px;
+}
+
+.header_links{
+  display: flex;
+  
+
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited, a:hover, a:active {
+  color: inherit;
+}
+
+.header_links div{
+  padding:0px 10px;
 }

@@ -19,7 +19,8 @@ const MainPage = () => {
                             </span>
                         </div>
                         <div className='main_banner_button'>
-                            <button>Get started ➝</button>
+                         
+                            <button type='button' onClick={(e) => { e.preventDefault(); location.href='/'; }}>Get started ➝</button>
                         </div>
                     </div>
                     <img src={Banner} className='main_banner_img' />
