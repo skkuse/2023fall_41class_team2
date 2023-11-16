@@ -1,8 +1,41 @@
 // Copyright (C) 2023 Intel Corporation
 // SPDX-License-Identifier: MIT
 
-$header-height: 50px;
+$header-height: 120px;
+
+$text-size: 15px;
 
 $main-background-color: #B5E2B2;
-
 $green : #569161;
+
+// font
+@font-face {
+  font-family: "Poppins";
+  src: url(@/fonts/Poppins-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url(@/fonts/Poppins-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url(@/fonts/Poppins-Medium.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url(@/fonts/Poppins-SemiBold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url(@/fonts/Poppins-Bold.ttf);
+  font-weight: 700;
+}
+

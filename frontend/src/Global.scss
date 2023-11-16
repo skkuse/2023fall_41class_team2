@@ -1,0 +1,15 @@
+// Copyright (C) 2023 Intel Corporation
+// SPDX-License-Identifier: MIT
+@import "@/base.scss";
+
+body {
+  font-size: $text-size;
+  font-family: "Poppins", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  font-weight: 300;
+}

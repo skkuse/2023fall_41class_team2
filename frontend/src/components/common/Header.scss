@@ -5,8 +5,27 @@
 
 .header {
   display: flex;
-  height: $header-height;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  background-color: lightgray;
+  background-color: $main-background-color;
+  height: $header-height;
+
+  &_logo {
+    width: 120px;
+    height: 80px;
+    margin-left: 60px;
+  }
+
+  &_nav {
+    display: flex;
+    padding: 30px 40px;
+    margin-right: 60px;
+    font-size: 20px;
+  }
+  &_nav_item::after {
+    content: "\00a0\00a0|\00a0\00a0";
+  }
+  &_nav_item:last-child::after {
+    content: "";
+  }
 }
