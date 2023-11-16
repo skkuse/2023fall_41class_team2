@@ -1,6 +1,7 @@
 import './MainPage.scss'
 import Banner from '../assets/banner-image.png';
 import CodeInput from '../assets/code-input.png'
+
 const MainPage = () => {
 
     return (

@@ -1,6 +1,7 @@
 // import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './base.scss';
+import './Global.scss';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import Layout from './Layout.tsx';
 import ErrorPage from './pages/ErrorPage.tsx';
@@ -28,7 +29,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <MainPage/>,
+        element: <MainPage />,
       },
     ],
     errorElement: <ErrorPage />,
