@@ -10,9 +10,13 @@
   background-color: $main-background-color;
   height: $header-height;
 
+  &_calc {
+    background-color: $calc-background-color;
+  }
+
   &_logo {
-    width: 120px;
-    height: 80px;
+    width: 100px;
+    height: 70px;
     margin-left: 60px;
   }
 
@@ -27,5 +31,8 @@
   }
   &_nav_item:last-child::after {
     content: "";
+  }
+  &_nav_item:hover {
+    cursor: pointer;
   }
 }

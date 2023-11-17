@@ -11,7 +11,7 @@
     background-color: $main-background-color;
 }
 .main_container {
-   // display: flex;
+   width: 65vw;
 }
 .main_banner {
     display: flex;
@@ -22,16 +22,17 @@
 }
 .main_banner_title{
     margin: 20px 0px;
+    font-family: 'Avenir', sans-serif;
+    font-size: 100px;
 }
 .main_banner_title_1 {
     color: $green;
-    font-size: 60px;
-    font-weight: 400;
 }
 .main_banner_title_2 {
     color: white;
-    font-size: 60px;
-    font-weight: 400;
+}
+.main_banner_description{
+    margin-bottom: 30px;
 }
 .main_banner_description span{
     color: black;
@@ -43,7 +44,7 @@
 .main_banner_button{
     margin-top: 10px;
 }
-.main_banner_button button{
+.main_banner_button a{
     background-color: $green;
     color: white;
     font-size: 17px;
@@ -54,14 +55,24 @@
 .main_banner_img{
     width: 430;
 }
+.main_context {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
 .main_context_text {
-    display: flex;
-    justify-content: end;
+    width: 100%;
+    text-align: end;
+    margin-bottom: 10px;
 }
 .main_context_text span{
     color: black;
     font-size: 20px;
     font-weight: 400;
     margin: 10px 0px;
+}
+
+.main_context_img {
+    width: 100%;
 }
