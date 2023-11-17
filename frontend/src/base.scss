@@ -7,6 +7,12 @@ $text-size: 15px;
 
 $main-background-color: #B5E2B2;
 $green : #569161;
+$calc-background-color: #ECECDE;
+$editor-background-color: #38382D;
+$editor-header-background: #292921;
+$editor-header-red: #F44336;
+$editor-header-green: #4CAF50;
+$editor-header-yellow: #FFC107;
 
 // font
 @font-face {
@@ -37,5 +43,17 @@ $green : #569161;
   font-family: "Poppins";
   src: url(@/fonts/Poppins-Bold.ttf);
   font-weight: 700;
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url(@/fonts/Avenir-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url(@/fonts/Avenir-Heavy.ttf);
+  font-weight: 600;
 }
 

@@ -1,0 +1,95 @@
+// Copyright (C) 2023 Intel Corporation
+// SPDX-License-Identifier: MIT
+
+import './Calculator.scss';
+// import { useRecoilState } from 'recoil';
+// import testState from '@/recoil/atoms/TestState';
+import { useState } from 'react';
+
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import CodeMirror from '@uiw/react-codemirror';
+import { vscodeDark } from '@uiw/codemirror-theme-vscode';
+import { java } from '@codemirror/lang-java';
+import { useRecoilState } from 'recoil';
+import javaState from '@/recoil/atoms/JavaState';
+import Header from '@/components/common/Header';
+
+const runJava = async (code: string) => {
+  const { data } = await axios.post('/api/carbon_emission_calculate', {
+    req_code: code,
+  });
+  return data;
+};
+
+function Calculator() {
+  const [code, setCode] = useState('');
+  const [result, setResult] = useRecoilState(javaState.result);
+
+  console.log(result);
+
+  const onChange = (value: string) => {
+    setCode(value);
+  };
+
+  const runJavaMutation = useMutation(runJava, {
+    onSuccess: (data) => {
+      setResult({
+        ...data,
+      });
+    },
+  });
+
+  const handleClick = () => {
+    runJavaMutation.mutate(code);
+  };
+
+  return (
+    <>
+      <Header type="calc" />
+      <div className="calculator">
+        <div className="calculator_container">
+          <div className="calculator_code">
+            <div className="calculator_code_title">Input your code</div>
+            <div className="calculator_code_input">
+              <div className="calculator_editor_header">
+                <div className="editor_circle">
+                  <div className="editor_circle_item red" />
+                  <div className="editor_circle_item yellow" />
+                  <div className="editor_circle_item green" />
+                </div>
+              </div>
+              <CodeMirror
+                value={code}
+                onChange={onChange}
+                className="calculator_editor"
+                theme={vscodeDark}
+                height="100%"
+                extensions={[java()]}
+              />
+            </div>
+            <button
+              type="button"
+              onClick={handleClick}
+              className="calculator_button"
+            >
+              Calculate
+            </button>
+          </div>
+          <div className="calculator_result">
+            <div className="calculator_first">
+              <div className="calculator_first_item"></div>
+              <div className="calculator_first_item"></div>
+            </div>
+            <div className="calculator_second">
+              <div className="calculator_second_item"></div>
+              <div className="calculator_second_item"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export default Calculator;

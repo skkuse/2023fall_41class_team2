@@ -1,0 +1,102 @@
+// Copyright (C) 2023 Intel Corporation
+// SPDX-License-Identifier: MIT
+
+@import '@/base.scss';
+
+.calculator {
+  background-color: $calc-background-color;
+  padding: 0 200px;
+
+  &_container {
+    // background-color: gray;
+    width: 65vw;
+    display: flex;
+    gap: 14px;
+    height: calc(100vh - #{$header-height});
+    padding: 10px 24px;
+  }
+
+  &_code {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    // background-color: antiquewhite;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_code_title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-family: 'Avenir', sans-serif;
+  }
+
+  &_code_input {
+    height: 70%;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+
+    .cm-editor {
+      background-color: $editor-background-color;
+    }
+
+    .cm-gutters {
+      background-color: $editor-background-color;
+    }
+  }
+
+  &_editor_header {
+    height: 32px;
+    background-color: $editor-header-background;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .editor_circle {
+      display: flex;
+      gap: 8px;
+      margin-left: 14px;
+    }
+
+    .editor_circle_item {
+      flex: 1;
+      width: 12px;
+      height: 12px;
+      border-radius: 100%;
+    }
+
+    .red {
+      background-color: $editor-header-red;
+    }
+    .yellow {
+      background-color: $editor-header-yellow;
+    }
+    .green {
+      background-color: $editor-header-green;
+    }
+  }
+
+  &_button {
+    position: absolute;
+    background-color: $green;
+    color: white;
+    font-size: 17px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    top: calc(70% + 80px);
+    right: 20px;
+  }
+
+  &_editor {
+    height: calc(100% - 32px);
+  }
+
+  &_result {
+    height: 100%;
+    // background-color: aqua;
+    flex: 1;
+  }
+}
