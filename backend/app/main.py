@@ -17,7 +17,7 @@ def read_root():
     return {"info": "Welcome SWE2023 Team2!"}
 
 
-@app.post("/carbon_emission_calculate")
+@app.post("/api/carbon_emission_calculate")
 def carbon_emission_calculate(
     code: Annotated[
         Code,
