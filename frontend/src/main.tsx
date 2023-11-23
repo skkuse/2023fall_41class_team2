@@ -9,6 +9,9 @@ import MainPage from './pages/MainPage.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RecoilRoot } from 'recoil';
 import Calculator from './pages/Calculator.tsx';
+import axios from 'axios';
+
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL ?? '';
 
 // Create a router for page routing
 const router = createBrowserRouter([

@@ -26,8 +26,6 @@ function Calculator() {
   const [code, setCode] = useState('');
   const [result, setResult] = useRecoilState(javaState.result);
 
-  console.log(result);
-
   const onChange = (value: string) => {
     setCode(value);
   };
@@ -43,6 +41,8 @@ function Calculator() {
   const handleClick = () => {
     runJavaMutation.mutate(code);
   };
+
+  console.log(result);
 
   return (
     <>
@@ -77,11 +77,28 @@ function Calculator() {
             </button>
           </div>
           <div className="calculator_result">
-            <div className="calculator_first">
-              <div className="calculator_first_item"></div>
+            <div className="calculator_result_title">Result</div>
+            <div className="calculator_result_first">
+              <div className="calculator_first_item">
+                <div className="calculator_result_item">
+                  carbon emissions (gram) : {result.carbon_emissions}
+                </div>
+                <div className="calculator_result_item">
+                  energy needed (kWh) : {result.energy_needed}
+                </div>
+                <div className="calculator_result_item">
+                  user time (sec) : {result.user_time}
+                </div>
+                <div className="calculator_result_item">
+                  cpu (core usage) : {result.cpu_core_use}
+                </div>
+                <div className="calculator_result_item">
+                  memory (KB) : {result.memory_usage}
+                </div>
+              </div>
               <div className="calculator_first_item"></div>
             </div>
-            <div className="calculator_second">
+            <div className="calculator_result_second">
               <div className="calculator_second_item"></div>
               <div className="calculator_second_item"></div>
             </div>
