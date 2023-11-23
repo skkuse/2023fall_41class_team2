@@ -4,8 +4,24 @@ from fastapi import FastAPI, HTTPException, Body
 from pydantic import BaseModel
 from module.java import java_exec
 from module.carbon_calc.green_algorithm import GreenAlgorithm, GreenAlgorithmConstants
+from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
+
+origins = [
+    "http://ecode-buck.s3-website.ap-northeast-2.amazonaws.com",
+    "http://localhost",
+    "http://localhost:5173",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 
 class Code(BaseModel):
