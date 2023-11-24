@@ -99,8 +99,12 @@ function Calculator() {
               <div className="calculator_first_item"></div>
             </div>
             <div className="calculator_result_second">
-              <div className="calculator_second_item"></div>
-              <div className="calculator_second_item"></div>
+              <div className="calculator_result_second_item">
+                {result.runtime_stdout}
+              </div>
+              <div className="calculator_result_second_item">
+                {result.runtime_stderr}
+              </div>
             </div>
           </div>
         </div>
