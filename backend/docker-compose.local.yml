@@ -17,14 +17,14 @@ services:
       - ./docker-file:/docker-file
       - /var/run/docker.sock:/var/run/docker.sock
     command: >
-      bash -c 
-      "
-      cd /docker-file
-      && echo '@DEV:     build user-container image... (This takes a few minutes. Once run, the cache helps.)'
-      && docker build -t user-container -f Dockerfile.user . 2> user_container_build.log
-      && cd /app 
-      && pipenv run uvicorn main:app --host 0.0.0.0 --reload
-      "
+        bash -c 
+        "
+        cd /docker-file
+        && echo '@DEV:     build user-container image... (This takes a few minutes. Once run, the cache helps.)'
+        && docker build -t user-container -f Dockerfile.user . 2> user_container_build.log
+        && cd /app 
+        && uvicorn main:app --host 0.0.0.0 --reload
+        "
 volumes:
   user-volumes:
     name: user-volumes
