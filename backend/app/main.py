@@ -5,6 +5,7 @@ from pydantic import BaseModel
 from module.java import java_exec
 from module.carbon_calc.green_algorithm import GreenAlgorithm, GreenAlgorithmConstants
 from fastapi.middleware.cors import CORSMiddleware
+import uuid
 
 app = FastAPI()
 
@@ -12,6 +13,7 @@ origins = [
     "http://ecode-buck.s3-website.ap-northeast-2.amazonaws.com",
     "http://localhost",
     "http://localhost:5173",
+    "http://127.0.0.1:5173",
 ]
 
 app.add_middleware(
@@ -21,7 +23,6 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
-
 
 
 class Code(BaseModel):
@@ -46,7 +47,7 @@ def carbon_emission_calculate(
         ),
     ],
 ):
-    uid = "ThisIsTestUID"  # Front should be pass this value
+    uid = str(uuid.uuid1())
     dicted_code = dict(code)
     java_code = dicted_code["req_code"]
     runtime_info = java_exec.runtime_results(java_code, uid)
