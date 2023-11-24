@@ -33,8 +33,8 @@ def prepare_user_file(uid, java_code) -> None:
 
     shell_run(f"cp {CONTAINER_PROFILE_PATH}/{SCRIPT_FILE_NAME} {user_path}")
 
-    searched_class = re.findall("class ([A-Za-z0-9_]*) {", java_code)
-    class_name = searched_class[0]
+    searched_class = re.findall("class ([A-Za-z0-9_\s]*){", java_code)
+    class_name = searched_class[0].strip()
 
     f = open(f"{user_path}/{class_name}.java", "w")
     f.write(java_code)
