@@ -110,6 +110,25 @@
     &_first {
       height: 30%;
       background-color: white;
+      margin-bottom: 20px;
+    }
+
+    &_second {
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      color: white;
+
+      &_item:first-child {
+        flex: 1;
+        background-color: black;
+        overflow: scroll;
+      }
+      &_item:last-child {
+        flex: 1;
+        background-color: gray;
+        overflow: scroll;
+      }
     }
   }
 }
