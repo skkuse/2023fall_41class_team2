@@ -100,9 +100,15 @@ function Calculator() {
             </div>
             <div className="calculator_result_second">
               <div className="calculator_result_second_item">
+                <span className="static-text">Output of the process</span>
+                <br></br>
+                <br></br>
                 {result.runtime_stdout}
               </div>
               <div className="calculator_result_second_item">
+                <span className="static-text">Error of process</span>
+                <br></br>
+                <br></br>
                 {result.runtime_stderr}
               </div>
             </div>
