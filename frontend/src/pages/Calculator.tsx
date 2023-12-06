@@ -23,10 +23,19 @@ import javaState from '@/recoil/atoms/JavaState';
 import Header from '@/components/common/Header';
 import Spinner from '@/assets/Spinner.svg';
 import ResultContainer from '@/components/ResultContainer';
+import prettier from 'prettier/standalone';
+import javaPlugin from 'prettier-plugin-java';
 
 const runJava = async (code: string) => {
+  const formattedCode: string = await prettier.format(code, {
+    parser: 'java',
+    plugins: [javaPlugin],
+    tabWidth: 4,
+  });
+  console.log(`formattedCode: \n${formattedCode}`);
+
   const { data } = await axios.post('/api/carbon_emission_calculate', {
-    req_code: code,
+    req_code: formattedCode,
   });
   return data;
 };
