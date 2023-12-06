@@ -59,7 +59,7 @@ class GreenAlgorithmFields:
     # RUNTIME DATA
     runtime_hours: float  # hours
     runtime_minutes: float  # minutes
-    runtime_seconds: float # seconds
+    runtime_seconds: float  # seconds
     runtime: float = None
 
     def __init__(self, **kwargs) -> None:
@@ -67,7 +67,11 @@ class GreenAlgorithmFields:
         self.__post_init__()  # explictly call __post_init__ because of custom init
 
     def __post_init__(self) -> None:
-        self.runtime = self.runtime_hours + self.runtime_minutes / 60 + self.runtime_seconds / (60*60)
+        self.runtime = (
+            self.runtime_hours
+            + self.runtime_minutes / 60
+            + self.runtime_seconds / (60 * 60)
+        )
 
 
 class GreenAlgorithm:
@@ -98,7 +102,9 @@ class GreenAlgorithm:
             result_dict["power_needed_cpu"] + result_dict["power_needed_gpu"]
         )
         result_dict["power_needed_memory"] = self.ga_data.pue_used * (
-            self.ga_data.memory / (1024*1024) * self.ga_data.constants.ref_values_dict["memoryPower"]
+            self.ga_data.memory
+            / (1024 * 1024)
+            * self.ga_data.constants.ref_values_dict["memoryPower"]
         )
         result_dict["power_needed"] = (
             result_dict["power_needed_core"] + result_dict["power_needed_memory"]
@@ -206,4 +212,9 @@ class GreenAlgorithm:
         return {
             "carbon_emissions": ce["carbon_emissions"],
             "energy_needed": ce["energy_needed"],
+            "tree_month": tm,
+            "driving_length_us": dk["us_nkm"],
+            "driving_length_eu": dk["eu_nkm"],
+            "flying_path": dk["flying_text"],
+            "flying_ratio": dk["flying_context"],
         }
