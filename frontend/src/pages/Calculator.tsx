@@ -1,6 +1,13 @@
 // Copyright (C) 2023 Intel Corporation
 // SPDX-License-Identifier: MIT
-
+import CO2 from '@/assets/co2-gas-svgrepo-com.svg';
+import Airplane from '@/assets/airplane-svgrepo-com.svg';
+import Car from '@/assets/car-svgrepo-com.svg';
+import Cpu from '@/assets/computer-cpu-svgrepo-com.svg';
+import Energy from '@/assets/energy-forecast-lightning-svgrepo-com.svg';
+import Memory from '@/assets/memory-chip-svgrepo-com.svg';
+import Time from '@/assets/time-hourglass-svgrepo-com.svg';
+import Tree from '@/assets/tree-decidious-svgrepo-com.svg';
 import './Calculator.scss';
 // import { useRecoilState } from 'recoil';
 // import testState from '@/recoil/atoms/TestState';
@@ -15,6 +22,7 @@ import { useRecoilState } from 'recoil';
 import javaState from '@/recoil/atoms/JavaState';
 import Header from '@/components/common/Header';
 import Spinner from '@/assets/Spinner.svg';
+import ResultContainer from '@/components/ResultContainer';
 
 const runJava = async (code: string) => {
   const { data } = await axios.post('/api/carbon_emission_calculate', {
@@ -93,24 +101,56 @@ function Calculator() {
           <div className="calculator_result">
             <div className="calculator_result_title">Result</div>
             <div className="calculator_result_first">
-              <div className="calculator_first_item">
-                <div className="calculator_result_item">
-                  carbon emissions (gram) : {result.carbon_emissions}
-                </div>
-                <div className="calculator_result_item">
-                  energy needed (kWh) : {result.energy_needed}
-                </div>
-                <div className="calculator_result_item">
-                  user time (sec) : {result.user_time}
-                </div>
-                <div className="calculator_result_item">
-                  cpu (core usage) : {result.cpu_core_use}
-                </div>
-                <div className="calculator_result_item">
-                  memory (KB) : {result.memory_usage}
-                </div>
+              <div className="calculator_first_item calculator_result_first_wrapper">
+                <ResultContainer
+                  imgFile={CO2}
+                  calResult={parseFloat(result.carbon_emissions)}
+                  unit={'g CO2e'}
+                  description={'Carbon footprint'}
+                />
+                <ResultContainer
+                  imgFile={Energy}
+                  calResult={parseFloat(result.energy_needed)}
+                  unit={'kWh'}
+                  description={'Energy needed'}
+                />
+                <ResultContainer
+                  imgFile={Car}
+                  calResult={parseFloat(result.driving_length_eu)}
+                  unit={'km'}
+                  description={'in a passenger car'}
+                />
+                <ResultContainer
+                  imgFile={Airplane}
+                  calResult={parseFloat(result.flying_ratio)}
+                  unit={'%'}
+                  description={'of a flight ' + result.flying_path}
+                />
+                <ResultContainer
+                  imgFile={Tree}
+                  calResult={parseFloat(result.tree_month)}
+                  unit={' tree-months'}
+                  description={'Carbon sequestration'}
+                />
+                <ResultContainer
+                  imgFile={Time}
+                  calResult={parseFloat(result.user_time)}
+                  unit={'sec'}
+                  description={'user time'}
+                />
+                <ResultContainer
+                  imgFile={Cpu}
+                  calResult={parseFloat(result.cpu_core_use)}
+                  unit={' cores'}
+                  description={'cpu cores usage'}
+                />
+                <ResultContainer
+                  imgFile={Memory}
+                  calResult={parseFloat(result.memory_usage)}
+                  unit={'KB'}
+                  description={'memory'}
+                />
               </div>
-              <div className="calculator_first_item"></div>
             </div>
             <div className="calculator_result_second">
               <div className="calculator_result_second_item">
