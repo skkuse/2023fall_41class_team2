@@ -4,7 +4,7 @@
 import './Calculator.scss';
 // import { useRecoilState } from 'recoil';
 // import testState from '@/recoil/atoms/TestState';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -40,13 +40,6 @@ function Calculator() {
       setIsLoading(false); // 에러 발생 시에도 로딩 상태를 false로 변경
     },
   });
-
-  useEffect(() => {
-    if (result) {
-      setIsLoading(false); // javaState.result 값이 변경되면 로딩 상태를 false로 변경
-    }
-  }, [result]);
-
   const handleClick = async () => {
     setIsLoading(true); // 버튼 클릭 시 로딩 상태를 true로 변경
 
