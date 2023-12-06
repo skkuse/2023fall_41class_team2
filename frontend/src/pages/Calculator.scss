@@ -108,7 +108,7 @@
     }
 
     &_first {
-      height: 30%;
+      height: 45%;
       background-color: white;
       margin-bottom: 20px;
     }
@@ -144,6 +144,7 @@
     }
   }
 }
+
 .static-text {
   font-weight: bold;
   color: rgb(140, 61, 225);
@@ -152,8 +153,16 @@
   border-radius: 10px;
   padding: 2px;
 }
+
 .spinner {
   height: 25px;
   width: 25px;
 }
 
+
+.calculator_result_first_wrapper{
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px 15px;
+}
