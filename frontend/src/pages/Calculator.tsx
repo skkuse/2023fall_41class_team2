@@ -4,7 +4,7 @@
 import './Calculator.scss';
 // import { useRecoilState } from 'recoil';
 // import testState from '@/recoil/atoms/TestState';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -14,6 +14,7 @@ import { java } from '@codemirror/lang-java';
 import { useRecoilState } from 'recoil';
 import javaState from '@/recoil/atoms/JavaState';
 import Header from '@/components/common/Header';
+import Spinner from '@/assets/Spinner.svg';
 
 const runJava = async (code: string) => {
   const { data } = await axios.post('/api/carbon_emission_calculate', {
@@ -25,21 +26,35 @@ const runJava = async (code: string) => {
 function Calculator() {
   const [code, setCode] = useState('');
   const [result, setResult] = useRecoilState(javaState.result);
-
+  const [isLoading, setIsLoading] = useState(false);
   const onChange = (value: string) => {
     setCode(value);
   };
 
   const runJavaMutation = useMutation(runJava, {
     onSuccess: (data) => {
-      setResult({
-        ...data,
-      });
+      setResult({ ...data });
+      setIsLoading(false); // 결과가 도착하면 로딩 상태를 false로 변경
+    },
+    onError: () => {
+      setIsLoading(false); // 에러 발생 시에도 로딩 상태를 false로 변경
     },
   });
 
-  const handleClick = () => {
-    runJavaMutation.mutate(code);
+  useEffect(() => {
+    if (result) {
+      setIsLoading(false); // javaState.result 값이 변경되면 로딩 상태를 false로 변경
+    }
+  }, [result]);
+
+  const handleClick = async () => {
+    setIsLoading(true); // 버튼 클릭 시 로딩 상태를 true로 변경
+
+    try {
+      await runJavaMutation.mutate(code);
+    } catch (error) {
+      console.error('Error occurred: ', error);
+    }
   };
 
   console.log(result);
@@ -72,8 +87,14 @@ function Calculator() {
               type="button"
               onClick={handleClick}
               className="calculator_button"
+              disabled={isLoading} // 로딩 중일 때 버튼 비활성화
             >
-              Calculate
+              {isLoading ? (
+                <img className="spinner" src={Spinner} alt="Loading..." />
+              ) : (
+                'Calculate'
+              )}{' '}
+              {/* 로딩 중일 때 텍스트 변경 */}
             </button>
           </div>
           <div className="calculator_result">
