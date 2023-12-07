@@ -31,7 +31,6 @@ export const useOutline = (
   useEffect(() => {
     function animation() {
       const id = setInterval(() => {
-        console.log(angle.current);
         if (angle.current < 180) {
           angle.current += 1;
           const codeInput = element.current as HTMLDivElement;
