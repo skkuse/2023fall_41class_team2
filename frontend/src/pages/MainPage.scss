@@ -19,10 +19,10 @@
 
 .main {
     display: flex;
+    flex-direction: column;
     width: 100vw;
     min-height: calc(100vh - #{$header-height});
     justify-content: center;
-    background-color: $main-background-color;
 
     .editor-show {
         background-color: $editor-background-color;
@@ -36,9 +36,11 @@
         visibility: hidden;
     }
 
-    &_container {
-        width: 60vw;
-     }
+    &_section1 {
+        width: 100%;
+        background-color: $main-background-color;
+        padding: 0 250px;
+    }
 
      &_banner {
          display: flex;
@@ -184,6 +186,27 @@
         }
         .green {
           background-color: $editor-header-green;
+        }
+    }
+
+    &_section2 {
+        width: 100%;
+        background-color: $calc-background-color;
+        padding: 0 250px;
+        min-height: 400px;
+
+        &_container {
+            width: 80%;
+        }
+
+        h1 {
+            font-family: 'Avenir', sans-serif;
+            font-size: 50px;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 20px;
         }
     }
 }
