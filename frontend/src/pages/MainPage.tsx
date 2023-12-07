@@ -3,14 +3,15 @@ import Banner from '../assets/banner-image.svg';
 import { Link } from 'react-router-dom';
 import Header from '@/components/common/Header';
 import { useEffect, useRef, useState } from 'react';
-import { useOutline } from '@/animation/MainAnimation';
+import { bannerVariants, useOutline } from '@/animation/MainAnimation';
 import MAIN_CODE from '@/constants/MainCode';
+import { motion } from 'framer-motion';
 
 const MainPage = () => {
   const [code, setCode] = useState('');
   const position = useRef(0);
   const [display, setDisplay] = useState(false);
-  const [typing, setTyping] = useState(false); // [TODO
+  const [typing, setTyping] = useState(false);
   const codeInput = useRef(null);
 
   useOutline(codeInput, 8, setDisplay, setTyping);
@@ -35,7 +36,13 @@ const MainPage = () => {
       <div className="main">
         <div className="main_container">
           <div className="main_banner">
-            <div className="main_banner_text">
+            <motion.div
+              className="main_banner_text"
+              variants={bannerVariants}
+              initial="hidden"
+              animate="display"
+              transition={{ duration: 0.7, delay: 0.9 }}
+            >
               <div className="main_banner_title">
                 <span className="main_banner_title_1">E</span>
                 <span className="main_banner_title_2">code</span>
@@ -50,8 +57,15 @@ const MainPage = () => {
               <Link className="main_banner_button" to="/calculate">
                 Get started ➝
               </Link>
-            </div>
-            <img src={Banner} className="main_banner_img" />
+            </motion.div>
+            <motion.img
+              src={Banner}
+              className="main_banner_img"
+              variants={bannerVariants}
+              initial="hidden"
+              animate="display"
+              transition={{ duration: 0.7, delay: 0 }}
+            />
           </div>
           <div className="main_context">
             <div className="main_context_text">
