@@ -3,37 +3,137 @@
 
 @import '@/base.scss';
 
+@keyframes fadeIn {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.2s;
+    animation-fill-mode: forwards;
+}
+
 .main {
     display: flex;
     width: 100vw;
     min-height: calc(100vh - #{$header-height});
     justify-content: center;
     background-color: $main-background-color;
+
+    .editor-show {
+        background-color: $editor-background-color;
+    }
+
+    .header-show {
+        background-color: $editor-header-background;
+    }
+
+    &_code_input {
+        width: 100%;
+        height: 70%;
+        position: relative;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        overflow: hidden;
+        // background: conic-gradient(from 270deg at 50% 100%, $editor-background-color 180deg, transparent 0deg 360deg);
+
+        &_hide {
+            z-index: 5;
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: calc(100% - 12px);
+            height: calc(100% - 6px);
+            border-top-right-radius: 14px;
+            border-top-left-radius: 14px;
+            background-color: $main-background-color;
+            opacity: 1;
+        }
+    }
+
+    &_editor {
+        background-color: transparent;
+        height: 430px;
+        color: $editor-main-text;
+        color: transparent;
+        padding: 10px 24px;
+        font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
+        position: relative;
+        overflow: hidden;
+        opacity: 1;
+    }
+
+    &_editor_inner {
+        position: absolute;
+        bottom: 0;
+    }
+
+    &_editor_header {
+        height: 32px;
+        background-color: transparent;
+        width: 100%;
+        display: flex;
+        align-items: center;
+
+        .editor_circle {
+          display: flex;
+          gap: 8px;
+          margin-left: 14px;
+        }
+
+        .editor_circle_item {
+          flex: 1;
+          width: 12px;
+          height: 12px;
+          border-radius: 100%;
+        }
+
+        .red {
+          background-color: $editor-header-red;
+        }
+        .yellow {
+          background-color: $editor-header-yellow;
+        }
+        .green {
+          background-color: $editor-header-green;
+        }
+    }
 }
+
 .main_container {
-   width: 65vw;
+   width: 60vw;
 }
+
 .main_banner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    width: 80%;
     margin: 0 auto;
+    width: 80%;
 }
+
 .main_banner_title{
     margin: 20px 0px;
     font-family: 'Avenir', sans-serif;
     font-size: 100px;
 }
+
 .main_banner_title_1 {
     color: $green;
 }
+
 .main_banner_title_2 {
     color: white;
 }
+
 .main_banner_description{
     margin-bottom: 30px;
 }
+
 .main_banner_description span{
     color: black;
     font-size: 20px;
@@ -42,19 +142,25 @@
 }
 
 .main_banner_button{
-    margin-top: 10px;
-}
-.main_banner_button a{
     background-color: $green;
+    display: inline-block;
     color: white;
     font-size: 17px;
     padding: 10px 15px;
     border: none;
     border-radius: 20px;
+    transition: 0.15s;
 }
+
+.main_banner_button:hover{
+    background-color: white;
+    color: $green;
+}
+
 .main_banner_img{
-    width: 430;
+    width: 40rem;
 }
+
 .main_context {
     display: flex;
     flex-direction: column;
@@ -62,10 +168,11 @@
 }
 
 .main_context_text {
-    width: 100%;
+    width: 95%;
     text-align: end;
     margin-bottom: 10px;
 }
+
 .main_context_text span{
     color: black;
     font-size: 20px;

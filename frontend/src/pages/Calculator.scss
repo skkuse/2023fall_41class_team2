@@ -8,8 +8,7 @@
   padding: 0 200px;
 
   &_container {
-    // background-color: gray;
-    width: 65vw;
+    width: 100%;
     display: flex;
     gap: 14px;
     height: calc(100vh - #{$header-height});
@@ -20,7 +19,6 @@
     height: 100%;
     overflow: hidden;
     position: relative;
-    // background-color: antiquewhite;
     flex: 1;
     display: flex;
     flex-direction: column;
