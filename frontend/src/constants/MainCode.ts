@@ -1,7 +1,7 @@
 // Copyright (C) 2023 Intel Corporation
 // SPDX-License-Identifier: MIT
 
-const MAIN_CODE = `
+export const MAIN_CODE = `
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -176,4 +176,4 @@ public class WordCount {
     }
 }`;
 
-export default MAIN_CODE;
+export const DEFAULT_CODE = `public class HelloSKKU { public static void main(String[ ] args) { for(int i = 0; i < 10; i++){ System.out.println("Hello SKKU!"); System.err.println("Bye SKKU!");}}}`;
