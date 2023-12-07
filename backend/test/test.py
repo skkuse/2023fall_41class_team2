@@ -2,6 +2,8 @@ from locust import HttpUser, task, TaskSet
 
 
 class MainBehavior(TaskSet):
+    wait_time = 50
+
     @task
     def main_task(self):
         self.client.post(
