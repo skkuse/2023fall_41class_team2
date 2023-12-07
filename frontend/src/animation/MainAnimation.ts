@@ -7,6 +7,7 @@ export const useOutline = (
   element: React.MutableRefObject<null | HTMLElement>,
   interval: number,
   setDisplay: React.Dispatch<React.SetStateAction<boolean>>,
+  setTyping: React.Dispatch<React.SetStateAction<boolean>>,
 ) => {
   const angle = useRef(0);
   const [, setValue] = useState(0);
@@ -24,6 +25,7 @@ export const useOutline = (
         setValue(angle.current);
       } else {
         setDisplay(true);
+        setTyping(true);
         clearInterval(id);
       }
     }, interval);

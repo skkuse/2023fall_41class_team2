@@ -59,7 +59,6 @@
         background-color: transparent;
         height: 430px;
         color: $editor-main-text;
-        color: transparent;
         padding: 10px 24px;
         font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
         position: relative;
@@ -70,6 +69,7 @@
     &_editor_inner {
         position: absolute;
         bottom: 0;
+        min-height: 100%;
     }
 
     &_editor_header {
