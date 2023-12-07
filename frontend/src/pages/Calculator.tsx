@@ -11,7 +11,7 @@ import Tree from '@/assets/tree-decidious-svgrepo-com.svg';
 import './Calculator.scss';
 // import { useRecoilState } from 'recoil';
 // import testState from '@/recoil/atoms/TestState';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -23,6 +23,8 @@ import javaState from '@/recoil/atoms/JavaState';
 import Header from '@/components/common/Header';
 import Spinner from '@/assets/Spinner.svg';
 import ResultContainer from '@/components/ResultContainer';
+import Footer from '@/components/common/Footer';
+
 import prettier from 'prettier/standalone';
 import javaPlugin from 'prettier-plugin-java';
 
@@ -75,7 +77,9 @@ function Calculator() {
     setCode(formattedCode);
   };
 
-  console.log(result);
+  useEffect(() => {
+    document.body.classList.remove('scroll-disable');
+  }, []);
 
   return (
     <>
@@ -196,6 +200,7 @@ function Calculator() {
           </div>
         </div>
       </div>
+      <Footer type="calc" />
     </>
   );
 }

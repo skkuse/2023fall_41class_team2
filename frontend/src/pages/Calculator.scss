@@ -5,14 +5,14 @@
 
 .calculator {
   background-color: $calc-background-color;
-  padding: 0 200px;
+  padding: 0 250px;
 
   &_container {
     width: 100%;
     display: flex;
     gap: 14px;
     height: calc(100vh - #{$header-height});
-    padding: 10px 24px;
+    padding: 30px 24px;
   }
 
   &_code {

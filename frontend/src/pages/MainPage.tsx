@@ -7,6 +7,7 @@ import { showVariants, useOutline } from '@/animation/MainAnimation';
 import MAIN_CODE from '@/constants/MainCode';
 import { motion } from 'framer-motion';
 import AnimatedNumbers from 'react-animated-numbers';
+import Footer from '@/components/common/Footer';
 
 const MainPage = () => {
   const [code, setCode] = useState('');
@@ -176,6 +177,7 @@ const MainPage = () => {
           </div>
         </div>
       </div>
+      <Footer type="calc" />
     </>
   );
 };
