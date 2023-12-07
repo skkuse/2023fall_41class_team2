@@ -6,11 +6,7 @@ import { JavaState } from './StateTypes';
 
 const result = atom({
   key: 'result',
-  default: {
-    user_time: '',
-    cpu_percent: '',
-    memory_usage: '',
-  },
+  default: {},
 });
 
 const javaState: JavaState = {

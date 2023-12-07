@@ -31,7 +31,7 @@
   }
 
   &_code_input {
-    height: 70%;
+    height: 80%;
     position: relative;
     border-radius: 20px;
     overflow: hidden;
@@ -85,8 +85,8 @@
     padding: 10px 15px;
     border: none;
     border-radius: 20px;
-    top: calc(70% + 80px);
-    // right: 20px;
+    top: calc(80% + 80px);
+    right: 20px;
   }
 
   &_editor {

@@ -7,7 +7,7 @@ const ResultContainer = ({
   description,
 }: {
   imgFile: string;
-  calResult: Number;
+  calResult: number;
   unit: string;
   description: string;
 }) => {
@@ -19,9 +19,12 @@ const ResultContainer = ({
       <div className="wrapper_res">
         <div className="wrapper_text">
           <div className="wrapper_text_res">
-            {decimalIndex !== -1 && numberString.length - decimalIndex - 1 > 6
-              ? calResult.toFixed(6)
-              : numberString}
+            {calResult
+              ? decimalIndex !== -1 &&
+                numberString.length - decimalIndex - 1 > 6
+                ? calResult.toFixed(6)
+                : numberString
+              : 0}
             {unit}
           </div>
           <div className="wrapper_text_desc">{description}</div>
