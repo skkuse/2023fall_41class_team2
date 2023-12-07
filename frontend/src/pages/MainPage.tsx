@@ -6,12 +6,16 @@ import { useEffect, useRef, useState } from 'react';
 import { bannerVariants, useOutline } from '@/animation/MainAnimation';
 import MAIN_CODE from '@/constants/MainCode';
 import { motion } from 'framer-motion';
+import AnimatedNumbers from 'react-animated-numbers';
 
 const MainPage = () => {
   const [code, setCode] = useState('');
-  const position = useRef(0);
   const [display, setDisplay] = useState(false);
   const [typing, setTyping] = useState(false);
+  const typeFin = useRef(false);
+  const [co2, setCo2] = useState(0);
+
+  const position = useRef(0);
   const codeInput = useRef(null);
 
   useOutline(codeInput, 8, setDisplay, setTyping);
@@ -20,14 +24,23 @@ const MainPage = () => {
     if (!typing) {
       return;
     }
-    const interval = setInterval(() => {
+    const typeInterval = setInterval(() => {
       if (position.current < MAIN_CODE.length - 1) {
         setCode((prev) => prev + MAIN_CODE[position.current]);
         position.current += 1;
       } else {
-        clearInterval(interval);
+        clearInterval(typeInterval);
+        typeFin.current = true;
       }
     }, 10);
+
+    const co2Interval = setInterval(() => {
+      if (!typeFin.current) {
+        setCo2((prev) => prev + 256.43);
+      } else {
+        clearInterval(co2Interval);
+      }
+    }, 1000);
   }, [typing]);
 
   return (
@@ -68,8 +81,13 @@ const MainPage = () => {
             />
           </div>
           <div className="main_context">
-            <div className="main_context_text">
-              <span>253.64g CO2e</span>
+            <div className={`main_context_text${display ? '' : ' hide'}`}>
+              <AnimatedNumbers
+                includeComma
+                animateToNumber={co2}
+              ></AnimatedNumbers>
+              <div>g CO2E</div>
+              {/* <span>253.64g CO2e</span> */}
             </div>
             {/* <img className="main_context_img" src={CodeInput} /> */}
             <div className="main_code_input" ref={codeInput}>
