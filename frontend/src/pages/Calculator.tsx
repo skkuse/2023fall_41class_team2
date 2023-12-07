@@ -79,6 +79,10 @@ function Calculator() {
 
   useEffect(() => {
     document.body.classList.remove('scroll-disable');
+
+    return () => {
+      setResult({});
+    };
   }, []);
 
   return (
