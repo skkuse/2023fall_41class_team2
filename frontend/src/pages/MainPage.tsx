@@ -2,16 +2,32 @@ import './MainPage.scss';
 import Banner from '../assets/banner-image.svg';
 import { Link } from 'react-router-dom';
 import Header from '@/components/common/Header';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useOutline } from '@/animation/MainAnimation';
 import MAIN_CODE from '@/constants/MainCode';
 
 const MainPage = () => {
-  const [code] = useState(MAIN_CODE);
+  const [code, setCode] = useState('');
+  const position = useRef(0);
   const [display, setDisplay] = useState(false);
+  const [typing, setTyping] = useState(false); // [TODO
   const codeInput = useRef(null);
 
-  useOutline(codeInput, 8, setDisplay);
+  useOutline(codeInput, 8, setDisplay, setTyping);
+
+  useEffect(() => {
+    if (!typing) {
+      return;
+    }
+    const interval = setInterval(() => {
+      if (position.current < MAIN_CODE.length - 1) {
+        setCode((prev) => prev + MAIN_CODE[position.current]);
+        position.current += 1;
+      } else {
+        clearInterval(interval);
+      }
+    }, 10);
+  }, [typing]);
 
   return (
     <>
