@@ -110,7 +110,7 @@
          font-size: 20px;
 
          & div {
-            font-weight: 400;
+            font-weight: 500;
          }
      }
 
@@ -192,7 +192,7 @@
     &_section2 {
         width: 100%;
         background-color: $calc-background-color;
-        padding: 0 250px;
+        padding: 80px 250px;
         min-height: 400px;
 
         &_container {
@@ -200,9 +200,11 @@
         }
 
         h1 {
+            margin: 0;
             font-family: 'Avenir', sans-serif;
             font-size: 50px;
-            margin-top: 30px;
+            font-weight: 600;
+            margin-bottom: 10px;
         }
 
         p {

@@ -3,7 +3,7 @@ import Banner from '../assets/banner-image.svg';
 import { Link } from 'react-router-dom';
 import Header from '@/components/common/Header';
 import { useEffect, useRef, useState } from 'react';
-import { bannerVariants, useOutline } from '@/animation/MainAnimation';
+import { showVariants, useOutline } from '@/animation/MainAnimation';
 import MAIN_CODE from '@/constants/MainCode';
 import { motion } from 'framer-motion';
 import AnimatedNumbers from 'react-animated-numbers';
@@ -38,7 +38,7 @@ const MainPage = () => {
         clearInterval(typeInterval);
         typeFin.current = true;
       }
-    }, 10);
+    }, 7);
 
     const co2Interval = setInterval(() => {
       if (!typeFin.current) {
@@ -58,7 +58,7 @@ const MainPage = () => {
             <div className="main_banner">
               <motion.div
                 className="main_banner_text"
-                variants={bannerVariants}
+                variants={showVariants}
                 initial="hidden"
                 animate="display"
                 transition={{ duration: 0.7, delay: 0.9 }}
@@ -81,7 +81,7 @@ const MainPage = () => {
               <motion.img
                 src={Banner}
                 className="main_banner_img"
-                variants={bannerVariants}
+                variants={showVariants}
                 initial="hidden"
                 animate="display"
                 transition={{ duration: 0.7, delay: 0 }}
@@ -121,25 +121,58 @@ const MainPage = () => {
         </div>
         <div className="main_section2">
           <div className="main_section2_container">
-            <h1>Green Calculate formula</h1>
-            <p>
+            <motion.div
+              initial="hidden"
+              variants={showVariants}
+              whileInView="display"
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 0.5 }}
+            >
+              <h1>Green Calculate formula</h1>
+              <hr
+                style={{
+                  backgroundColor: 'black',
+                  height: '1px',
+                  width: 'calc(100vw - 500px)',
+                  marginBottom: '60px',
+                }}
+              />
+            </motion.div>
+            <motion.p
+              initial="hidden"
+              variants={showVariants}
+              whileInView="display"
+              viewport={{ once: true }}
+              transition={{ duration: 0.3, delay: 1 }}
+            >
               The carbon footprint is calculated by estimating the energy draw
               of the algorithm and the carbon intensity of producing this energy
-              at a given location: carbon footprint = energy needed * carbon
-              intensity Where the energy needed is: runtime * (power draw for
-              cores * usage + power draw for memory) * PUE * PSF The power draw
-              for the computing cores depends on the model and number of cores,
-              while the memory power draw only depends on the size of memory
-              available. The usage factor corrects for the real core usage
-              (default is 1, i.e. full usage). The PUE (Power Usage
+              at a given location:
+              <br /> <br />
+              <span style={{ fontWeight: 500 }}>
+                carbon footprint = energy needed * carbon intensity
+              </span>
+              <br /> <br />
+              Where the energy needed is:
+              <br /> <br />
+              <span style={{ fontWeight: 500 }}>
+                runtime * (power draw for cores * usage + power draw for memory)
+                * PUE * PSF
+              </span>
+              <br /> <br />
+              The power draw for the computing cores depends on the model and
+              number of cores, while the memory power draw only depends on the
+              size of memory available. The usage factor corrects for the real
+              core usage (default is 1, i.e. full usage). The PUE (Power Usage
               Effectiveness) measures how much extra energy is needed to operate
               the data centre (cooling, lighting etc.). The PSF (Pragmatic
               Scaling Factor) is used to take into account multiple identical
-              runs (e.g. for testing or optimisation). The Carbon Intensity
-              depends on the location and the technologies used to produce
-              electricity. But note that the "energy needed" indicated at the
-              top of this page is independent of the location.
-            </p>
+              runs (e.g. for testing or optimisation).
+              <br /> <br />
+              The Carbon Intensity depends on the location and the technologies
+              used to produce electricity. But note that the "energy needed"
+              indicated at the top of this page is independent of the location.
+            </motion.p>
           </div>
         </div>
       </div>

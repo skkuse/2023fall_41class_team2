@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 
 // variants
 
-export const bannerVariants = {
+export const showVariants = {
   hidden: {
     opacity: 0,
     y: 20,
