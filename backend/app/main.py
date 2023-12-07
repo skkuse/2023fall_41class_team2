@@ -11,6 +11,7 @@ app = FastAPI()
 
 origins = [
     "http://ecode-buck.s3-website.ap-northeast-2.amazonaws.com",
+    "https://ecode.life",
     "http://localhost",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
