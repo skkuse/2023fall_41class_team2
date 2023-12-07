@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import Header from '@/components/common/Header';
 import { useEffect, useRef, useState } from 'react';
 import { showVariants, useOutline } from '@/animation/MainAnimation';
-import MAIN_CODE from '@/constants/MainCode';
+import { MAIN_CODE } from '@/constants/MainCode';
 import { motion } from 'framer-motion';
 import AnimatedNumbers from 'react-animated-numbers';
 import Footer from '@/components/common/Footer';

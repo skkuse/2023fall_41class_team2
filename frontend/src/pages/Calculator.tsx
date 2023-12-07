@@ -27,6 +27,7 @@ import Footer from '@/components/common/Footer';
 
 import prettier from 'prettier/standalone';
 import javaPlugin from 'prettier-plugin-java';
+import { DEFAULT_CODE } from '@/constants/MainCode';
 
 const getFormattedCode = async (code: string) => {
   const formattedCode: string = await prettier.format(code, {
@@ -47,7 +48,7 @@ const runJava = async (code: string) => {
 };
 
 function Calculator() {
-  const [code, setCode] = useState('');
+  const [code, setCode] = useState(DEFAULT_CODE);
   const [result, setResult] = useRecoilState(javaState.result);
   const [isLoading, setIsLoading] = useState(false);
   const onChange = (value: string) => {
