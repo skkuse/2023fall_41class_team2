@@ -26,13 +26,17 @@ import ResultContainer from '@/components/ResultContainer';
 import prettier from 'prettier/standalone';
 import javaPlugin from 'prettier-plugin-java';
 
-const runJava = async (code: string) => {
+const getFormattedCode = async (code: string) => {
   const formattedCode: string = await prettier.format(code, {
     parser: 'java',
     plugins: [javaPlugin],
     tabWidth: 4,
   });
   console.log(`formattedCode: \n${formattedCode}`);
+  return formattedCode;
+};
+const runJava = async (code: string) => {
+  const formattedCode: string = await getFormattedCode(code);
 
   const { data } = await axios.post('/api/carbon_emission_calculate', {
     req_code: formattedCode,
@@ -66,6 +70,10 @@ function Calculator() {
       console.error('Error occurred: ', error);
     }
   };
+  const handleFormatButtonClick = async () => {
+    const formattedCode: string = await getFormattedCode(code);
+    setCode(formattedCode);
+  };
 
   console.log(result);
 
@@ -93,19 +101,29 @@ function Calculator() {
                 extensions={[java()]}
               />
             </div>
-            <button
-              type="button"
-              onClick={handleClick}
-              className="calculator_button"
-              disabled={isLoading} // 로딩 중일 때 버튼 비활성화
-            >
-              {isLoading ? (
-                <img className="spinner" src={Spinner} alt="Loading..." />
-              ) : (
-                'Calculate'
-              )}{' '}
-              {/* 로딩 중일 때 텍스트 변경 */}
-            </button>
+            <div className="button_container">
+              <button
+                type="button"
+                onClick={handleFormatButtonClick}
+                className="calculator_format_button"
+                disabled={isLoading} // 로딩 중일 때 버튼 비활성화
+              >
+                Format
+              </button>
+              <button
+                type="button"
+                onClick={handleClick}
+                className="calculator_button"
+                disabled={isLoading} // 로딩 중일 때 버튼 비활성화
+              >
+                {isLoading ? (
+                  <img className="spinner" src={Spinner} alt="Loading..." />
+                ) : (
+                  'Calculate'
+                )}{' '}
+                {/* 로딩 중일 때 텍스트 변경 */}
+              </button>
+            </div>
           </div>
           <div className="calculator_result">
             <div className="calculator_result_title">Result</div>
