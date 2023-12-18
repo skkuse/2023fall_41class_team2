@@ -2,7 +2,7 @@ import sys
 from typing import Union, Annotated
 from fastapi import FastAPI, HTTPException, Body
 from pydantic import BaseModel
-from module.java import java_exec
+from module.java.java_exec import UserContainer
 from module.carbon_calc.green_algorithm import GreenAlgorithm, GreenAlgorithmConstants
 from fastapi.middleware.cors import CORSMiddleware
 import uuid
@@ -36,6 +36,7 @@ def read_root():
 
 @app.post("/api/carbon_emission_calculate")
 def carbon_emission_calculate(
+    # sample code for Fastapi docs api test
     code: Annotated[
         Code,
         Body(
@@ -47,10 +48,20 @@ def carbon_emission_calculate(
         ),
     ],
 ):
+    # Unique uuid allocation for each user
+    # uuid is used for container name and identification.
     uid = str(uuid.uuid1())
+
+    # Extract Java code from request
     dicted_code = dict(code)
     java_code = dicted_code["req_code"]
-    runtime_info = java_exec.runtime_results(java_code, uid)
+
+    # Creating a UserContainer Instance
+    user_container = UserContainer(java_code, uid)
+    # Run code in Container and get result
+    user_container.forwarding_user_file()
+    user_container.run_code()
+    runtime_info = user_container.read_results()
 
     # memory, runtime_minutes, usage_cpu_used values are given by java_exec module
     # some value is hardcoded because of Hardware diff
@@ -68,8 +79,11 @@ def carbon_emission_calculate(
         "tdp_per_core": 11.3,
         "usage_cpu_used": runtime_info["cpu_core_use"],
     }
-
-    carbon_emission_info = GreenAlgorithm(test_data_dict).carbon_calc_results()
+    # Creating a GreenAlgorithm(carbon emission calculator) Instance
+    carbon_emission_calculator = GreenAlgorithm(test_data_dict)
+    # Get calculated result
+    carbon_emission_info = carbon_emission_calculator.carbon_calc_results()
+    # Combine with runtime_info to return results
     combined_info = dict(carbon_emission_info, **runtime_info)
 
     return combined_info
