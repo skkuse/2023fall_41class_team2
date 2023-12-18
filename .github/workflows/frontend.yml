@@ -1,0 +1,8 @@
+name: vite deploy
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - frontend/src/**
+  workflow_dispatch:
