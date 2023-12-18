@@ -176,4 +176,4 @@ public class WordCount {
     }
 }`;
 
-export const DEFAULT_CODE = `public class HelloSKKU { public static void main(String[ ] args) { for(int i = 0; i < 10; i++){ System.out.println("Hello SKKU!"); System.err.println("Bye SKKU!");}}}`;
+export const DEFAULT_CODE = `public class HelloSKKU { public static void main(String[ ] args) { for(int i = 0; i < 10; i++){ System.out.println("Hello SKKU!"); System.err.println("Bye SKKU! error");}}}`;
