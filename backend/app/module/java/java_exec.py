@@ -33,7 +33,8 @@ class UserContainer:
         self.USER_ENV_FILE_NAME = os.environ["USER_ENV_FILE_NAME"]
         self.LOCAL_ENV_FILE_NAME = os.environ["LOCAL_ENV_FILE_NAME"]
 
-    def shell_run(self, cmd: str) -> object:
+    # encapsulation. Preventing outside access
+    def __shell_run(self, cmd: str) -> object:
         return subprocess.run(
             cmd,
             shell=True,
@@ -47,10 +48,12 @@ class UserContainer:
         if not os.path.exists(user_path):
             os.makedirs(user_path)
 
-        self.shell_run(
+        self.__shell_run(
             f"cp {self.CONTAINER_PROFILE_PATH}/{self.SCRIPT_FILE_NAME} {user_path}"
         )
 
+        # find class name to make and compile java file
+        # "public class" or "class" is needed
         searched_classes = re.findall(
             "public class ([A-Za-z0-9_\s]*){|class ([A-Za-z0-9_\s]*){", self.java_code
         )
@@ -58,6 +61,7 @@ class UserContainer:
             print("ERROR: Class name does not exist.")
             return
 
+        # use "public class" or "class"
         class_name = searched_classes[0][0].strip() or searched_classes[0][1].strip()
 
         with open(f"{user_path}/{class_name}.java", "w") as f:
@@ -75,33 +79,40 @@ class UserContainer:
             "python3": f"{self.USER_VOLUME_PATH}/{self.uid}/{self.SCRIPT_FILE_NAME} {self.uid}",
         }
 
+        # run docker using host docker socket
+        # DooD (Docker out of Docker)
         cmd = "docker run " + " ".join(f"{k} {v}" for k, v in docker_options.items())
-        result = self.shell_run(cmd)
+        result = self.__shell_run(cmd)
 
         print(f"@DEV:     Run user[{self.uid}] success")
 
     def read_results(self) -> dict:
+        # read compile_stderr from user container volume
         with open(
             f"{self.USER_VOLUME_PATH}/{self.uid}/{self.COMPILE_STDERR_FILE_NAME}", "r"
         ) as f:
             compile_stderr = f.read()
             self.runtime_info["compile_stderr"] = compile_stderr
 
+            # Return immediately. Code cannot be executed if a compilation error occurs
             if compile_stderr:
                 return self.runtime_info
 
+        # read runtime_stderr from user container volume
         with open(
             f"{self.USER_VOLUME_PATH}/{self.uid}/{self.RUNTIME_STDERR_FILE_NAME}", "r"
         ) as f:
             runtime_stderr = f.read()
             self.runtime_info["runtime_stderr"] = runtime_stderr
 
+        # read runtime_stdout from user container volume
         with open(
             f"{self.USER_VOLUME_PATH}/{self.uid}/{self.RUNTIME_STDOUT_FILE_NAME}", "r"
         ) as f:
             runtime_stdout = f.read()
             self.runtime_info["runtime_stdout"] = runtime_stdout
 
+        # read runtime_analysis(stdout of /usr/bin/time) from user container volume
         with open(
             f"{self.USER_VOLUME_PATH}/{self.uid}/{self.RUNTIME_ANALYSIS_FILE_NAME}", "r"
         ) as f:
@@ -111,6 +122,7 @@ class UserContainer:
             x.replace("\t", "").split(": ") for x in runtime_analysis_raw.splitlines()
         ]
 
+        # Filter essential features in runtime_analysis
         essential_analysis_key = {
             "User time (seconds)": "user_time",
             "Percent of CPU this job got": "cpu_core_use",
@@ -121,6 +133,7 @@ class UserContainer:
             if feature[0] in essential_analysis_key:
                 self.runtime_info[essential_analysis_key[feature[0]]] = feature[1]
 
+        # remove % character and conversion to decimal point
         self.runtime_info["cpu_core_use"] = (
             float(self.runtime_info["cpu_core_use"][:-1]) / 100
         )
