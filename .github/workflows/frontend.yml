@@ -3,7 +3,6 @@ on:
   push:
     branches:
       - main
-      - feature/github-action
     paths:
       - frontend/src/**
   workflow_dispatch:
