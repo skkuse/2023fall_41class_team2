@@ -1,0 +1,172 @@
+// Copyright (C) 2023 Intel Corporation
+// SPDX-License-Identifier: MIT
+
+@import '@/base.scss';
+
+.calculator {
+  background-color: $calc-background-color;
+  padding: 0 250px;
+
+  &_container {
+    width: 100%;
+    display: flex;
+    gap: 14px;
+    height: calc(100vh - #{$header-height});
+    padding: 30px 24px;
+  }
+
+  &_code {
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &_code_title {
+    font-size: 28px;
+    margin-bottom: 20px;
+    font-family: 'Avenir', sans-serif;
+  }
+
+  &_code_input {
+    height: 80%;
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+
+    .cm-editor {
+      background-color: $editor-background-color;
+    }
+
+    .cm-gutters {
+      background-color: $editor-background-color;
+    }
+  }
+
+  &_editor_header {
+    height: 32px;
+    background-color: $editor-header-background;
+    width: 100%;
+    display: flex;
+    align-items: center;
+
+    .editor_circle {
+      display: flex;
+      gap: 8px;
+      margin-left: 14px;
+    }
+
+    .editor_circle_item {
+      flex: 1;
+      width: 12px;
+      height: 12px;
+      border-radius: 100%;
+    }
+
+    .red {
+      background-color: $editor-header-red;
+    }
+    .yellow {
+      background-color: $editor-header-yellow;
+    }
+    .green {
+      background-color: $editor-header-green;
+    }
+  }
+
+  &_button,
+  &_format_button {
+    // position: absolute;
+    background-color: $green;
+    color: white;
+    font-size: 17px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 20px;
+    top: calc(80% + 80px);
+    right: 20px;
+  }
+
+  &_editor {
+    height: calc(100% - 32px);
+  }
+
+  &_result {
+    height: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    &_title {
+      font-size: 28px;
+      margin-bottom: 20px;
+      font-family: 'Avenir', sans-serif;
+      text-align: end;
+    }
+
+    &_first {
+      height: 45%;
+      background-color: white;
+      margin-bottom: 20px;
+    }
+
+    &_second {
+      height: 50%;
+      display: flex;
+      flex-direction: column;
+      color: white;
+
+      &_item {
+        flex: 1;
+        overflow: scroll;
+        overflow: auto; // 스크롤바가 필요할 때만 보이도록 설정
+        padding: 10px;
+        border: 3px solid;
+        border-radius: 10px;
+        margin-bottom: 10px;
+
+        &:first-child {
+          background-color: rgb(0, 0, 0);
+          color: rgb(200, 200, 200);
+          border-color: rgb(43, 79, 255);
+        }
+
+        &:last-child {
+          background-color: rgb(177, 177, 177);
+          color: rgb(183, 1, 1);
+          border-color: #ff2b2b;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}
+
+.static-text {
+  font-weight: bold;
+  color: rgb(140, 61, 225);
+  font-family: 'Avenir', sans-serif;
+  border: 2px solid;
+  border-radius: 10px;
+  padding: 2px;
+}
+
+.spinner {
+  height: 25px;
+  width: 25px;
+}
+
+.calculator_result_first_wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 10px 15px;
+}
+
+.button_container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}

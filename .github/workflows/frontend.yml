@@ -6,3 +6,43 @@ on:
     paths:
       - frontend/src/**
   workflow_dispatch:
+
+jobs:
+  build:
+    env:
+      CI: false
+    name: react-project build
+    runs-on: ubuntu-20.04
+    defaults:
+      run:
+        working-directory: "./frontend"
+    steps:
+      - name: checkout code
+        uses: actions/checkout@v3.3.0
+        with:
+          node-version: 18
+
+      - name: cache dependency
+        uses: actions/cache@v3.2.3
+        with:
+          path: node_modules
+          key: ${{runner.os}}-build-${{hashFiles('**/yarn.lock')}}
+          restore-key: |
+            ${{runner.os}}-build-
+            ${{runner.os}}-
+
+      - name: install dependency
+        run: yarn install
+
+      - name: build project
+        run: yarn run build
+
+      - name: s3 upload
+        env:
+          AWS_ACCESS_KEY_ID: ${{secrets.AWS_ACCESS_KEY_ID}}
+          AWS_SECRET_ACCESS_KEY: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+        run: |
+          aws s3 cp \
+            --recursive \
+            --region ap-northeast-2 \
+            dist s3://ecode-buck

@@ -1,0 +1,30 @@
+version: "3.8"
+
+services:
+  api-server:
+    build:
+      context: .
+      dockerfile: ./docker-file/Dockerfile.local
+    env_file:
+      - ./docker-env/docker.env.local
+      - ./docker-env/docker.env.user
+    ports:
+      - "8000:8000"
+    volumes:
+      - user-volumes:/user-data
+      - ./app:/app
+      - ./docker-env:/docker-env
+      - ./docker-file:/docker-file
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: >
+        bash -c 
+        "
+        cd /docker-file
+        && echo '@DEV:     build user-container image... (This takes a few minutes. Once run, the cache helps.)'
+        && docker build -t user-container -f Dockerfile.user . 2> user_container_build.log
+        && cd /app 
+        && uvicorn main:app --host 0.0.0.0 --reload
+        "
+volumes:
+  user-volumes:
+    name: user-volumes

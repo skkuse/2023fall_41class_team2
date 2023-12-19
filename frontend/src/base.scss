@@ -1,0 +1,61 @@
+// Copyright (C) 2023 Intel Corporation
+// SPDX-License-Identifier: MIT
+
+$header-height: 120px;
+$footer-height: 120px;
+
+$text-size: 15px;
+
+$main-background-color: #B5E2B2;
+$green : #569161;
+$calc-background-color: #ECECDE;
+$editor-background-color: #38382D;
+$editor-header-background: #292921;
+$editor-header-red: #F44336;
+$editor-header-green: #4CAF50;
+$editor-header-yellow: #FFC107;
+$editor-main-text: rgba(255, 255, 255, 0.4);
+
+// font
+@font-face {
+  font-family: "Poppins";
+  src: url(@/fonts/Poppins-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url(@/fonts/Poppins-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url(@/fonts/Poppins-Medium.ttf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url(@/fonts/Poppins-SemiBold.ttf);
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Poppins";
+  src: url(@/fonts/Poppins-Bold.ttf);
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url(@/fonts/Avenir-Regular.ttf);
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Avenir";
+  src: url(@/fonts/Avenir-Heavy.ttf);
+  font-weight: 600;
+}
+
